@@ -1,6 +1,10 @@
 package com.example.PJS4_2;
 
+import lib.Article;
+import persistant.Data;
+
 import java.io.*;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,13 +13,21 @@ import javax.servlet.annotation.*;
 public class HelloServlet extends HttpServlet {
     private String message;
 
-    public void init() {
-        message = "Hello World!";
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        try {
+            Class.forName("persitant.MediatekData");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request,response);
         response.setContentType("text/html");
-
+        List<Article> articles = Data.getInstance().getArticles();
+        request.setAttribute("articles", articles);
         // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
@@ -24,8 +36,7 @@ public class HelloServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     public void destroy() {

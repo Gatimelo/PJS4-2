@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class data {
+public class Data {
+
+    private static Data instance = new Data();
 
     // classe mono-instance : l'unique instance est connue de la bibliotheque
     // via une injection de d�pendance dans son bloc static
@@ -24,15 +26,18 @@ public class data {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projet mediatek", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helphuman", "root", "root");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return con;
     }
 
-    @Override
-    public List<Article> articles() {
+    public static Data getInstance() {
+        return instance;
+    }
+
+    public List<Article> getArticles() {
         Connection con = connexion();
         List<Article> articles = new ArrayList();
         try {
@@ -46,22 +51,22 @@ public class data {
                 String titre = tableResultat.getString("titre");
                 String date = tableResultat.getString("date");
                 String nomAsso = tableResultat.getString("nomAssociation");
-                String html = tableResultat.getString("html");//String builder
-                Blob resume = tableResultat.getBlob("resume");
+                String contenu = tableResultat.getString("contenu");//String builder
+                String resume = tableResultat.getString("resume");
                 Association association = getAsso(nomAsso);
                 if (association != null) {
-                    Article article = new Article(num, auteur, titre, date, html, resume, association);
+                    Article article = new Article(num, auteur, titre, date, contenu, resume, association);
                 } else {
-                    Article article = new Article(num, auteur, titre, date, html, resume);
+                    Article article = new Article(num, auteur, titre, date, contenu, resume);
                     articles.add(article);
                 }
             }
+            //articles = trierArticles(articles);
             return articles;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
         }
-        //trierArticle(articles);
     }
 
     public Association getAsso(String nomAsso) {
@@ -81,96 +86,60 @@ public class data {
         }
         return null;
     }
+    /*
+    // va r�cup�rer le User dans la BD et le renvoie
+    // si pas trouv�, renvoie null
+    @Override
+    public Utilisateur getUser(String login, String password){
+        Connection con = connexion();
+        try {
+            // exécution de la requète
+            PreparedStatement requeteStatique = null;
+            requeteStatique = con.prepareStatement(
+                    "SELECT * FROM UTILISATEUR WHERE login=?");
 
-        // renvoie la liste de tous les documents de la biblioth�que
-        @Override
-        public List<Document> catalogue(int type) {
-            Connection con = connexion();
-            List<Document> catalogue = new ArrayList<>();
-            try {
-                // exécution de la requète
-                PreparedStatement requeteStatique = null;
-                requeteStatique = con.prepareStatement("SELECT * FROM DOCUMENT where type=?");
-                requeteStatique.setInt(1, type);
-                ResultSet tableResultat = null;
-                tableResultat = requeteStatique.executeQuery();
-                while(tableResultat.next()) {
-                    int num = tableResultat.getInt("num");
+            requeteStatique.setString(1,login);
+            ResultSet tableResultat = null;
+            tableResultat = requeteStatique.executeQuery();
 
-                    String titre = tableResultat.getString("titre");
-                    String auteur = tableResultat.getString("auteur");
-                    int anneePublication = tableResultat.getInt("anneePublication");
-                    String dateAjout = tableResultat.getString("dateAjout");
-                    Document doc = new Document() {
-                        @Override
-                        public Object[] data() {
-                            return new Object[] {
-                                    num, type, titre, auteur, anneePublication, dateAjout
-                            };
-                        };
-                    };
-                    catalogue.add(doc);
-                }
-                return catalogue;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        // va r�cup�rer le User dans la BD et le renvoie
-        // si pas trouv�, renvoie null
-        @Override
-        public Utilisateur getUser(String login, String password){
-            Connection con = connexion();
-            try {
-                // exécution de la requète
-                PreparedStatement requeteStatique = null;
-                requeteStatique = con.prepareStatement(
-                        "SELECT * FROM UTILISATEUR WHERE login=?");
-
-                requeteStatique.setString(1,login);
-                ResultSet tableResultat = null;
-                tableResultat = requeteStatique.executeQuery();
-
-                // affichage du résultat
-                if (!tableResultat.next()){
+            // affichage du résultat
+            if (!tableResultat.next()){
+                con.close();
+                return null;
+            } else {
+                if (!(tableResultat.getString("password").equals(password))) {
                     con.close();
                     return null;
                 } else {
-                    if (!(tableResultat.getString("password").equals(password))) {
-                        con.close();
-                        return null;
-                    } else {
-                        System.out.println(tableResultat.getString("login"));
-                        System.out.println(tableResultat.getString("password"));
-                        Utilisateur user = new Utilisateur() {
-                            @Override
-                            public String login() {
-                                return login;
-                            }
+                    System.out.println(tableResultat.getString("login"));
+                    System.out.println(tableResultat.getString("password"));
+                    Utilisateur user = new Utilisateur() {
+                        @Override
+                        public String login() {
+                            return login;
+                        }
 
-                            @Override
-                            public String password() {
-                                return password;
-                            }
+                        @Override
+                        public String password() {
+                            return password;
+                        }
 
-                            @Override
-                            public Object[] data() {
-                                return new Object[] {
-                                        login,password
-                                };
-                            }
-                        };
-                        con.close();
-                        return user;
-                    }
+                        @Override
+                        public Object[] data() {
+                            return new Object[] {
+                                    login,password
+                            };
+                        }
+                    };
+                    con.close();
+                    return user;
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return null;
+    }
 
         // va r�cup�rer le document de num�ro numDocument dans la BD
         // et le renvoie
@@ -263,6 +232,6 @@ public class data {
             }
         }
 
-    }
+    }*/
 
 }
