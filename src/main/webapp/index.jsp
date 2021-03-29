@@ -26,7 +26,6 @@
         out.print(article.getResume());
         out.print("<br/>");
         out.print("Publié le : " + article.getDate());
-        out.print("test");
     }
 
 %>
