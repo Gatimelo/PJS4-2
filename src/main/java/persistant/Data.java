@@ -2,10 +2,9 @@ package persistant;
 
 import lib.Article;
 import lib.Association;
+import lib.Mission;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +49,10 @@ public class Data {
                 String auteur = tableResultat.getString("auteur");
                 String titre = tableResultat.getString("titre");
                 String date = tableResultat.getString("date");
-                String nomAsso = tableResultat.getString("nomAssociation");
+                int idAsso = tableResultat.getInt("idAssociation");
                 String contenu = tableResultat.getString("contenu");//String builder
                 String resume = tableResultat.getString("resume");
-                Association association = getAsso(nomAsso);
+                Association association = getAsso(idAsso);
                 if (association != null) {
                     Article article = new Article(num, auteur, titre, date, contenu, resume, association);
                 } else {
@@ -69,16 +68,16 @@ public class Data {
         }
     }
 
-    public Association getAsso(String nomAsso) {
+    public Association getAsso(int idAsso) {
         Connection con = connexion();
         try {
             PreparedStatement requeteStatique;
-            requeteStatique = con.prepareStatement("SELECT * FROM ASSOCIATION WHERE nomAssociation=?");
-            requeteStatique.setString(1, nomAsso);
+            requeteStatique = con.prepareStatement("SELECT * FROM ASSOCIATION WHERE idAssociation=?");
+            requeteStatique.setInt(1, idAsso);
             ResultSet tableResultat;
             tableResultat = requeteStatique.executeQuery();
             if (tableResultat.next()) {
-                Association asso = new Association(tableResultat.getInt("id"), nomAsso, tableResultat.getString("mailAssociation"), tableResultat.getString("telAssociation"), tableResultat.getString("ville"));
+                Association asso = new Association(tableResultat.getInt("id"), tableResultat.getString("nomAssociation"), tableResultat.getString("mailAssociation"), tableResultat.getString("telAssociation"), tableResultat.getString("ville"));
                 return asso;
             }
         } catch (SQLException throwables) {
@@ -86,6 +85,38 @@ public class Data {
         }
         return null;
     }
+
+    public List<Mission> getMissions() {
+        Connection con = connexion();
+        List<Mission> missions = new ArrayList();
+        try {
+            PreparedStatement requeteStatique = null;
+            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE WHERE visible=1");
+            ResultSet tableResultat = null;
+            tableResultat = requeteStatique.executeQuery();
+            while (tableResultat.next()) {
+                int num = tableResultat.getInt("id");
+                String titre = tableResultat.getString("titreMission");
+                String contenu = tableResultat.getString("contenuMission");
+                String dateDebut = tableResultat.getString("dateDebut");
+                String dateFin = tableResultat.getString("dateFin");
+                int nbBenevolesMax = tableResultat.getInt("nbBenevolesMax");
+                int idAsso = tableResultat.getInt("idAssociation");
+                Association association = getAsso(idAsso);
+                if (association != null) {
+                    Mission mission = new Mission(num, titre, dateDebut, dateFin, contenu, nbBenevolesMax, association);
+                } else {
+                    Mission mission = new Mission(num, titre, dateDebut, dateFin, contenu, nbBenevolesMax);
+                    missions.add(mission);
+                }
+            }
+            return missions;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     /*
     // va r�cup�rer le User dans la BD et le renvoie
     // si pas trouv�, renvoie null
