@@ -36,6 +36,34 @@ public class Data {
         return instance;
     }
 
+    public void creerArticle(String auteur, String titre, int id, String contenu, String resume) {
+		PreparedStatement requete = null;
+		Connection con = connexion();
+		Date actuelle = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String date = dateFormat.format(actuelle);
+		try {
+			requete = con.prepareStatement("INSERT INTO article values ('?','?','?','?','?','?');");
+			requete.setString(1, auteur);
+			requete.setString(2, titre);
+			requete.setString(3, date);
+			requete.setInt(4, id);
+			requete.setString(5, contenu);
+			requete.setString(6, resume);
+			requete.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (requete != null)
+					requete.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+    
     public List<Article> getArticles() {
         Connection con = connexion();
         List<Article> articles = new ArrayList();
