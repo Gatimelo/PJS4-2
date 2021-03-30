@@ -18,4 +18,56 @@ public class Mission {
         this(id, titre, dateDebut, dateFin, contenu, nbBenevolesMax);
         this.association = association;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getNbBenevolesMax() {
+        return nbBenevolesMax;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getDateDebut() {
+        return dateDebut;
+    }
+
+    public String getDateFin() {
+        return dateFin;
+    }
+
+    public String getContenu() {
+        return contenu;
+    }
+
+    public Association getAssociation() {
+        return association;
+    }
+
+    public void setNbBenevolesMax(int nbBenevolesMax) {
+        this.nbBenevolesMax = nbBenevolesMax;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setDateDebut(String dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public void setDateFin(String dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
+    }
+
+    public void setAssociation(Association association) {
+        this.association = association;
+    }
 }

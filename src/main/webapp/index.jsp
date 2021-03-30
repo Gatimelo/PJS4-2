@@ -37,7 +37,7 @@
 			</tr>
 		</thead>
 <tbody>
-<% List<Article> articles = (List) request.getAttribute("students");
+<% List<Article> articles = (List) request.getAttribute("articles");
    for(Article article : articles) {
 
 %>
