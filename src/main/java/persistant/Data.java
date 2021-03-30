@@ -5,6 +5,11 @@ import lib.Association;
 import lib.Mission;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +44,11 @@ public class Data {
     public void creerArticle(String auteur, String titre, int id, String contenu, String resume) {
 		PreparedStatement requete = null;
 		Connection con = connexion();
-		Date actuelle = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String date = dateFormat.format(actuelle);
+		LocalDateTime actuelle = LocalDateTime.now();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String date = actuelle.format(dateFormat);
 		try {
-			requete = con.prepareStatement("INSERT INTO article values ('?','?','?','?','?','?');");
+			requete = con.prepareStatement("INSERT INTO article values (?,?,?,?,?,?);");
 			requete.setString(1, auteur);
 			requete.setString(2, titre);
 			requete.setString(3, date);
