@@ -28,11 +28,7 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
         List<Article> articles = Data.getInstance().getArticles();
         request.setAttribute("articles", articles);
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        
     }
 
     @Override
