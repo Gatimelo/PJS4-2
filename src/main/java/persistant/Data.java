@@ -28,10 +28,12 @@ public class Data {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helphuman", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pjs4", "root", "");
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("ouii");
         return con;
     }
 
@@ -72,7 +74,7 @@ public class Data {
         List<Article> articles = new ArrayList();
         try {
             PreparedStatement requeteStatique = null;
-            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE WHERE visible=1");
+            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE");
             ResultSet tableResultat = null;
             tableResultat = requeteStatique.executeQuery();
             while (tableResultat.next()) {
@@ -152,7 +154,7 @@ public class Data {
         List<Mission> missions = new ArrayList();
         try {
             PreparedStatement requeteStatique = null;
-            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE WHERE visible=1");
+            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE");
             ResultSet tableResultat = null;
             tableResultat = requeteStatique.executeQuery();
             while (tableResultat.next()) {
@@ -213,7 +215,7 @@ public class Data {
         try {
             // exécution de la requète
             PreparedStatement requeteStatique = null;
-            requeteStatique = con.prepareStatement("SELECT * FROM UTILISATEUR WHERE mail=?");
+            requeteStatique = con.prepareStatement("SELECT * FROM association WHERE mailAssociation=?");
             requeteStatique.setString(1,mail);
             ResultSet tableResultat = requeteStatique.executeQuery();
             Association asso = null;
@@ -245,7 +247,7 @@ public class Data {
         try {
             // exécution de la requète
             PreparedStatement requeteStatique   = null;
-            requeteStatique = con.prepareStatement("SELECT * FROM BENEVOLE WHERE mail=?");
+            requeteStatique = con.prepareStatement("SELECT * FROM BENEVOLE WHERE mailBenevole=?");
             requeteStatique.setString(1,mail);
             ResultSet tableResultat = requeteStatique.executeQuery();
             Benevole benevole = null;

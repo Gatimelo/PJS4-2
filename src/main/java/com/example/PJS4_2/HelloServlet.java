@@ -9,32 +9,32 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/accueil")
+@WebServlet(name = "helloServlet", value = "/", loadOnStartup = 1)
 public class HelloServlet extends HttpServlet {
-    private String message;
 
     @Override
     public void init() throws ServletException {
         super.init();
         try {
-            Class.forName("persitant.Data");
+            Class.forName("persistant.Data");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("tetee");
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("ouiidz");
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request,response);
         response.setContentType("text/html");
         List<Article> articles = Data.getInstance().getArticles();
         request.setAttribute("articles", articles);
+        System.out.println("passé");
 
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    public void destroy() {
     }
 }
