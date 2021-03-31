@@ -1,4 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="main.java.lib.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="j" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -95,109 +100,18 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-5 mb-lg-4 col-lg-3" data-aos="fade">
-            <div class="position-relative unit-8">
-            <a href="#" class="mb-3 d-block img-a"><img src="images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
-            <span class="d-block text-gray-500 text-normal small mb-3">By <a href="#">Colorlib</a> <span class="mx-2">&bullet;</span> Jan 20th, 2019</span>
-            <h2 class="h5 font-weihgt-normal line-height-sm mb-3"><a href="#" class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In pariatur nostrum asperiores corrupti delectus.</p>
-            </div>
-          </div>
+          <% Article article = (Article) request.getAttribute("article");
+	        out.println("<div class='col-md-6 mb-5 mb-lg-4 col-lg-3' data-aos='fade'>");
+	        	out.println("<div class='position-relative unit-8'>");
+	          		out.println("<a href='#' class='mb-3 d-block img-a'><img src='images/img_2.jpg' alt='Image' class='img-fluid rounded'></a>");
+	          		out.println("<span class='d-block text-gray-500 text-normal small mb-3'>Par <a href='#'>" + article.getAuteur() + "</a> <span class='mx-2'>&bullet;</span>" + article.getDate() + "</span>");
+	          		out.println("<h2 class='h5 font-weihgt-normal line-height-sm mb-3'><a href='#' class='text-black'>" + article.getTitre() + "</a></h2>");
+	          		out.println("<p>" + article.getResume() + "</p>");
+	          		out.println("<p>" + article.getContenu() + "</p>");
+	          	out.println("</div>");
+	         out.println("</div>");
+		    	%>
         </div>
-
 
         <div class="row mt-5">
           <div class="col-md-12 text-center">
