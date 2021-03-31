@@ -17,7 +17,7 @@ public class HelloServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         try {
-            Class.forName("persitant.MediatekData");
+            Class.forName("persitant.Data");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
