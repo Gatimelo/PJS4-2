@@ -1,4 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="main.java.lib.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="j" %>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -114,95 +119,38 @@
           </div>
         </div>
 
-        <div class="row" data-aos="fade">
-         <div class="col-md-12">
-
-           <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-              <div class="mb-4 mb-md-0 mr-5">
-               <div class="job-post-item-header d-flex align-items-center">
-                 <h2 class="mr-3 text-black h4">Titre de l'offre</h2>
-                 <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">Association :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-big104"></span> <a href="#">Localisation :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-weekly15"></span> <a href="#">Date début/fin :</a></div>
-                 <div class="badge-wrap">
-                  <span class="bg-warning text-white badge py-2 px-4">Full Time</span>
-                 </div>
-               </div>
-               <div class="job-post-item-body d-block d-md-flex">
-                 <div class="mr-3"><span class="fl-bigmug-line-book188"></span> <a href="#">Contenu :</a></div>
-               </div>
-              </div>
-
-              <div class="ml-auto">
-                <a href="#" class="btn btn-secondary rounded-circle btn-favorite text-gray-500"><span class="icon-heart"></span></a>
-                <a href="#" class="btn btn-primary py-2">Apply Job</a>
-              </div>
-           </div>
-
-         </div>
-        </div>
-
-        <div class="row" data-aos="fade">
-         <div class="col-md-12">
-
-           <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-              <div class="mb-4 mb-md-0 mr-5">
-               <div class="job-post-item-header d-flex align-items-center">
-                 <h2 class="mr-3 text-black h4">Titre de l'offre</h2>
-                 <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">Association :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-big104"></span> <a href="#">Localisation :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-weekly15"></span> <a href="#">Date début/fin :</a></div>
-                 <div class="badge-wrap">
-                  <span class="bg-warning text-white badge py-2 px-4">Full Time</span>
-                 </div>
-               </div>
-               <div class="job-post-item-body d-block d-md-flex">
-                 <div class="mr-3"><span class="fl-bigmug-line-book188"></span> <a href="#">Contenu :</a></div>
-               </div>
-              </div>
-
-              <div class="ml-auto">
-                <a href="#" class="btn btn-secondary rounded-circle btn-favorite text-gray-500"><span class="icon-heart"></span></a>
-                <a href="#" class="btn btn-primary py-2">Apply Job</a>
-              </div>
-           </div>
-
-         </div>
-        </div>
-
-        <div class="row" data-aos="fade">
-         <div class="col-md-12">
-
-           <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-              <div class="mb-4 mb-md-0 mr-5">
-               <div class="job-post-item-header d-flex align-items-center">
-                 <h2 class="mr-3 text-black h4">Titre de l'offre</h2>
-                 <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">Association :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-big104"></span> <a href="#">Localisation :</a></div>
-                 <div class="mr-3"><span class="fl-bigmug-line-weekly15"></span> <a href="#">Date début/fin :</a></div>
-                 <div class="badge-wrap">
-                  <span class="bg-warning text-white badge py-2 px-4">Full Time</span>
-                 </div>
-               </div>
-               <div class="job-post-item-body d-block d-md-flex">
-                 <div class="mr-3"><span class="fl-bigmug-line-book188"></span> <a href="#">Contenu :</a></div>
-               </div>
-              </div>
-
-              <div class="ml-auto">
-                <a href="#" class="btn btn-secondary rounded-circle btn-favorite text-gray-500"><span class="icon-heart"></span></a>
-                <a href="#" class="btn btn-primary py-2">Apply Job</a>
-              </div>
-           </div>
-
-         </div>
-        </div>
-
-
-
+        <% ArrayList<Mission> missions = (ArrayList) request.getAttribute("missions");
+			    for(Mission mission : missions) {
+			    	out.println("<div class='row' data-aos='fade'>");
+			    		out.println("<div class='col-md-12'>");
+			
+			    			out.println("<div class='job-post-item bg-white p-4 d-block d-md-flex align-items-center'>");
+			
+			    				out.println("<div class='mb-4 mb-md-0 mr-5'>");
+			    					out.println("<div class='job-post-item-header d-flex align-items-center'>");
+			    						out.println("<h2 class='mr-3 text-black h4'>Titre de l'offre</h2>");
+			    						out.println("<div class='mr-3'><span class='fl-bigmug-line-portfolio23'></span> <a href='#'>Association : " + mission.getAssociation().getNomAsso() + "</a></div>");
+			    						out.println("<div class='mr-3'><span class='fl-bigmug-line-big104'></span> <a href='#'>Localisation : " + mission.getAssociation().getVille() + "</a></div>");
+			                			out.println("<div class='mr-3'><span class='fl-bigmug-line-weekly15'></span> <a href='#'>Date début/fin : " + mission.getDateDebut() + "/" + mission.getDateFin() + "</a></div>");
+			                			out.println("<div class='badge-wrap'>");
+			                 				out.println("<span class='bg-warning text-white badge py-2 px-4'>Full Time</span>");
+			                			out.println("</div>");
+			                		out.println("</div>");
+			             			out.println("<div class='job-post-item-body d-block d-md-flex'>");
+			                			out.println("<div class='mr-3'><span class='fl-bigmug-line-book188'></span> <a href='#'>Contenu : " + mission.getContenu() + "</a></div>");
+			               			out.println("</div>");
+			               		out.println("</div>");
+			
+			            		out.println("<div class='ml-auto'>");
+			              			out.println("<a href='#' class='btn btn-secondary rounded-circle btn-favorite text-gray-500'><span class='icon-heart'></span></a>");
+			               			out.println("<a href='#' class='btn btn-primary py-2'>Apply Job</a>");
+			              		out.println("</div>");
+			              	out.println("</div>");
+			         	out.println("</div>");
+			    	out.println("</div>");
+			    }
+				%>
+        
         <div class="row mt-5">
           <div class="col-md-12 text-center">
             <div class="site-block-27">
