@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/animate.css">
+fr
 
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/fl-bigmug-line.css">
@@ -30,46 +31,6 @@
   </head>
   <body>
 
-  <div class="site-wrap">
-
-    <div class="site-mobile-menu">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div> <!-- .site-mobile-menu -->
-
-
-    <header class="site-navbar py-1" role="banner">
-
-      <div class="container">
-        <div class="row align-items-center">
-
-          <div class="col-6 col-xl-2">
-            <h1 class="mb-0"><a href="index.html" class="text-black h2 mb-0">Help<strong>Human</strong></a></h1>
-          </div>
-
-
-
-          <div class="col-10 col-xl-10 d-none d-xl-block">
-            <nav class="site-navigation text-right" role="navigation">
-
-              <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Accueil</a></li>
-                <li><a href="demande.html">Offres</a></li>
-
-                <li><a href="blog.html">Articles</a></li>
-                <li><a href="about.html">à propos</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="new-post.html"><span class="rounded bg-primary py-2 px-3 text-white">Poster une annonce</a></li>
-                <li><a href="coins.html"><span class="rounded bg-primary py-2 px-3 text-white">Connexion</a></li>
-
-                <li><a href="coins.html"></a></li>
-              </ul>
-            </nav>
-          </div>
 
           <div class="col-6 col-xl-2 text-right d-block">
 
@@ -86,7 +47,7 @@
       <div class="container">
         <div class="row row-custom align-items-center">
           <div class="col-md-10">
-            <h1 class="mb-2 text-white w-75"><span class="font-weight-bold">L'aide caritative</span> à porté de main</h1>
+            <h1 class="mb-2 text-white w-75"><span class="font-weight-bold">L'aide associatif</span> à porté de main</h1>
             <div class="job-search">
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -112,7 +73,6 @@
                             <option value="caritative">Caritative</option>
                             <option value="sociale">Sociale</option>
                             <option value="environmental">Environmental</option>
-                            <option value="culturel">Culturel</option>
                           </select>
                         </div>
                       </div>
@@ -140,7 +100,6 @@
                             <option value="caritative">Caritative</option>
                             <option value="sociale">Sociale</option>
                             <option value="environmental">Environmental</option>
-                            <option value="culturel">Culturel</option>
                           </select>
                         </div>
                       </div>
