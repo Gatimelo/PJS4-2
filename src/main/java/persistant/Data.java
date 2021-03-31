@@ -1,8 +1,6 @@
 package persistant;
 
-import lib.Article;
-import lib.Association;
-import lib.Mission;
+import lib.*;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -78,10 +76,10 @@ public class Data {
             ResultSet tableResultat = null;
             tableResultat = requeteStatique.executeQuery();
             while (tableResultat.next()) {
-                int num = tableResultat.getInt("id");
+                int num = tableResultat.getInt("idArticle");
                 String auteur = tableResultat.getString("auteur");
                 String titre = tableResultat.getString("titre");
-                String date = tableResultat.getString("date");
+                String date = tableResultat.getString("dateArticle");
                 int idAsso = tableResultat.getInt("idAssociation");
                 String contenu = tableResultat.getString("contenu");//String builder
                 String resume = tableResultat.getString("resume");
@@ -95,6 +93,36 @@ public class Data {
             }
             //articles = trierArticles(articles);
             return articles;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public Article getArticle(int idArticle) {
+        Connection con = connexion();
+        try {
+            PreparedStatement requeteStatique = null;
+            requeteStatique = con.prepareStatement("SELECT * FROM ARTICLE WHERE idArticle=?");
+            requeteStatique.setInt(1, idArticle);
+            ResultSet tableResultat = requeteStatique.executeQuery();
+            Article article = null;
+            if (tableResultat.next()) {
+                int num = tableResultat.getInt("idArticle");
+                String auteur = tableResultat.getString("auteur");
+                String titre = tableResultat.getString("titre");
+                String date = tableResultat.getString("dateArticle");
+                int idAsso = tableResultat.getInt("idAssociation");
+                String contenu = tableResultat.getString("contenu");//String builder
+                String resume = tableResultat.getString("resume");
+                Association association = getAsso(idAsso);
+                if (association != null) {
+                    article = new Article(num, auteur, titre, date, contenu, resume, association);
+                } else {
+                    article = new Article(num, auteur, titre, date, contenu, resume);
+                }
+            }
+            return article;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
@@ -147,6 +175,100 @@ public class Data {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
+    }
+
+    public Mission getMission(int idMission) {
+        Connection con = connexion();
+        try {
+            PreparedStatement requeteStatique = null;
+            requeteStatique = con.prepareStatement("SELECT * FROM MISSION WHERE idMission=?");
+            requeteStatique.setInt(1, idMission);
+            ResultSet tableResultat = requeteStatique.executeQuery();
+            Mission mission = null;
+            if (tableResultat.next()) {
+                int num = tableResultat.getInt("idMission");
+                String titre = tableResultat.getString("titreMission");
+                String contenu = tableResultat.getString("contenuMission");
+                String dateDebut = tableResultat.getString("dateDebut");
+                String dateFin = tableResultat.getString("dateFin");
+                int nbBenevolesMax = tableResultat.getInt("nbBenevolesMax");
+                int idAsso = tableResultat.getInt("idAssociation");
+                Association association = getAsso(idAsso);
+                if (association != null) {
+                    mission = new Mission(num, titre, dateDebut, dateFin, contenu, nbBenevolesMax, association);
+                } else {
+                    mission = new Mission(num, titre, dateDebut, dateFin, contenu, nbBenevolesMax);
+                }
+            }
+            return mission;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public Association getAsso(String mail, String mdp) throws SQLException {
+        Connection con = connexion();
+        try {
+            // exécution de la requète
+            PreparedStatement requeteStatique = null;
+            requeteStatique = con.prepareStatement("SELECT * FROM UTILISATEUR WHERE mail=?");
+            requeteStatique.setString(1,mail);
+            ResultSet tableResultat = requeteStatique.executeQuery();
+            Association asso = null;
+
+            // affichage du résultat
+            if (!tableResultat.next()){
+                con.close();
+                return null;
+            } else {
+                if (!(tableResultat.getString("mdpAssociation").equals(mdp))) {
+                    con.close();
+                    return null;
+                } else {
+                    int id = tableResultat.getInt("idAssociation");
+                    asso = new Association(id, mail, mdp);
+                };
+                con.close();
+                return asso;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        con.close();
+        return null;
+    }
+
+    public Benevole getBenevole(String mail, String mdp) throws SQLException {
+        Connection con = connexion();
+        try {
+            // exécution de la requète
+            PreparedStatement requeteStatique   = null;
+            requeteStatique = con.prepareStatement("SELECT * FROM BENEVOLE WHERE mail=?");
+            requeteStatique.setString(1,mail);
+            ResultSet tableResultat = requeteStatique.executeQuery();
+            Benevole benevole = null;
+
+            // affichage du résultat
+            if (!tableResultat.next()){
+                con.close();
+                return null;
+            } else {
+                if (!(tableResultat.getString("mdpAssociation").equals(mdp))) {
+                    con.close();
+                    return null;
+                } else {
+                    int id = tableResultat.getInt("idAssociation");
+                    benevole = new Benevole(id, mail, mdp);
+                };
+                con.close();
+                return benevole;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        con.close();
         return null;
     }
 

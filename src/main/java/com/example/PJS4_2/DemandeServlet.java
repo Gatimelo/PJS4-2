@@ -10,11 +10,11 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "DemandeServlet", value = "/DemandeServlet")
+@WebServlet(name = "DemandeServlet", value = "/demande")
 public class DemandeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/demandes.jsp").forward(request,response);
         response.setContentType("text/html");
         List<Mission> missions = Data.getInstance().getMissions();
         request.setAttribute("missions", missions);

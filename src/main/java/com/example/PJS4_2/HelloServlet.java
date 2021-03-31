@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
+@WebServlet(name = "helloServlet", value = "/accueil")
 public class HelloServlet extends HttpServlet {
     private String message;
 
@@ -28,7 +28,7 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
         List<Article> articles = Data.getInstance().getArticles();
         request.setAttribute("articles", articles);
-        
+
     }
 
     @Override
